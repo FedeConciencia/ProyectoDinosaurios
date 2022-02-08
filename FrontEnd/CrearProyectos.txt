@@ -1,0 +1,393 @@
+Arrastramos el Proyecto a Visual Code, click derecho en el proyecto Open Terminal ruta de acceso:
+
+IMPORTANTE ELIMINAR NODULE_MODULES (PESO) => recuperar cuando cargo el proyecto
+
+comando recuperar carpeta => npm install
+
+CREAR PROYECTO ANGULAR:
+
+Instalar Angular CLI (interprete de comandos) =>
+npm install -g @angular/cli
+
+Verificar version de Angular CLI Terminal => ng v
+
+
+Crear Proyecto Angular => ng new app-angular-proyecto
+
+Cuando les pregunte si quieren agregar el archivo de routes, confirmen con ‘y’
+
+Instalar Bootstrap al Proyecto Angular => ng add @ng-bootstrap/ng-bootstrap
+
+Automática ejecutar (recomendado Angular actualizado):
+
+Verificar que en el archivo app.module.ts figure la línea =>
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+Ejecutar la Aplicación Angular => ng serve
+Desde la Ruta especifica del proyecto Angular
+Abrimos el navegador => http://localhost:4200/
+
+Importante Solucionar Problema de Ejecución del Proyecto =>
+ng : No se puede cargar el archivo
+
+Desde la terminal PowerShell =>
+Comando Get-ExecutionPolicy (Verificamos)
+Comando Set-ExecutionPolicy -Scope CurrentUser
+Confirmar Unrestricted
+
+Creación de componentes de forma comando (Automatica) =>
+Ejecutar comando => ng g c nombre_componente
+Ejemplo: ng g c footer
+
+
+CREAR PROYECTO REACT:
+
+Estos comandos se pueden ingresar desde la consola de windows o desde la consola de Visual Code:
+
+Desde la carpera ProyectosReact =>create-react-app primer-app-react 
+
+ahora para crear Proyecto React => npx create-react-app my-app
+
+Desde el Proyecto => 
+
+npm install --save react-router-dom => este paquete/libreria permite crear rutas, vinculos 
+npm install react-router-dom@5.2.0 mantiene el SWITCH ROUTE
+
+npm install react-bootstrap bootstrap => este paquete/libreria corresponde a bootstrap 
+
+En la index.js => de esta forma podemos usar Bootstrap en la aplicación, gestionando la importación.
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+npm install axios => librería que permite la comunicación cliente-servidor. "axios": "^0.21.1", se verifica desde el package.json
+
+npm install fetch => librería que permite la comunicación cliente-servidor. "fetch": "^1.1.0",
+
+useForm => para la validación de formularios previamente hay que instalar
+npm install react-hook-form
+
+
+
+Ejecutar => npm start
+
+
+CREAR PROYECTO VUE:
+
+
+Estos comandos se pueden ingresar desde la consola de windows o desde la consola de Visual Code:
+
+Desde la carpera ProyectosVue => vue create app-vue-parcial
+
+Seleccionamos Manually Select features
+
+Seleccionamos Router y Vuex
+
+Use history mode for router? YES
+
+In package.json
+
+Save this as a preset for future projects? N
+
+Nos crea el proyecto Vue
+
+Desde el proyecto app-vue-parcial => vue add bootstrap-vue   (Posteriormente se verifica desde el main.js) Abrir pagina vue bootstrap components
+
+Use babel/polyfill? YES
+
+Use scss? NO
+
+D)- Dentro de la carpeta src => assets => creo la carpeta images (importo las imágenes de instrumentos) al final lo dejo en la carpeta Public
+
+E)- Dentro de la carpeta src => datos => (importo el archivo instrumentos.JSON) al final lo dejo en la carpeta Public
+
+Importamos axios => npm install axios (luego debe ser importada al proyecto) import axios from "axios";
+
+Importamos fetch => npm install fetch
+
+Ejecutar => npm run serve
+
+Estructura componente basico en VUE =>
+
+<template>
+
+  <div>
+
+    <br>
+
+    <b-alert show variant="dark">
+
+
+
+
+    </b-alert>
+
+  </div>  
+  
+</template>
+
+<script>
+
+
+export default {
+  name: 'Home',
+  components: {
+    
+  },
+  mounted() {
+   
+  },
+data() {
+
+    return {
+    
+        
+
+    }
+   
+  },
+  methods: {
+  }  
+
+}
+</script>
+
+<style scoped>
+
+
+</style>
+
+Template con desarrollo de tabla =>
+
+<template>
+
+  <div class='body'>
+
+    <br>
+
+    <b-alert show variant="dark">
+
+     <b-table-simple bordered dark>
+
+    <b-thead>
+
+    <b-th>
+
+    </b-th>  
+
+    </b-thead>  
+
+    <b-tbody>
+
+      <b-tr>
+
+        <b-td>
+
+        </b-td>  
+
+      </b-tr>  
+
+    </b-tbody> 
+ 
+    </b-table-simple>
+
+    </b-alert>
+
+  </div>  
+  
+</template>
+
+Template con desarrollo de Filas(row) y columnas (col) =>
+
+<template>
+
+  <div class='body'>
+
+    <br>
+
+    <b-alert show variant="dark">
+
+    <span v-for="(pais,index) in lista" :key="index">
+
+      <b-row>
+
+        <b-col>
+
+          <h3 class="nombre">{{ (pais.name).toUpperCase() }}</h3>
+
+        </b-col>  
+
+        <b-col>
+
+          
+
+        </b-col> 
+
+        <b-col>
+
+          
+
+        </b-col> 
+
+
+
+      </b-row>
+
+      <b-row>
+
+        <b-col>
+
+          <h4>Capital: </h4>
+
+        </b-col>  
+
+        <b-col>
+
+          <h4 class="capital">{{ (pais.capital).toUpperCase() }}</h4>
+
+        </b-col>  
+
+        <b-col>
+
+          
+
+        </b-col> 
+
+         
+      </b-row>  
+
+      <b-row>
+
+          <b-col>
+
+          <h4>Poblacion:</h4>
+
+          </b-col>  
+
+          <b-col>
+
+            <h4>{{ pais.population }}</h4>
+
+          </b-col>  
+
+          <b-col>
+
+             <b-button variant="link" :src="'/detallePais/' + pais.name">VER DETALLE</b-button>
+
+          </b-col>  
+
+         
+      </b-row>
+
+      <div class="linea"></div>  
+
+      <br>
+
+          
+    </span>  
+    
+
+    </b-alert>
+
+  </div>  
+  
+</template>
+
+
+
+CREAR PROYECTO NODE:
+
+1- Creo una carpeta para mi proyecto Node.
+
+2- Dentro de la carpeta principal del proyecto creo las carpetas src y dist.
+
+3- Abro una terminal en Visual Studio Code y navego hasta la carpeta del proyecto (Mejor Terminal Windows)
+
+
+4- Ejecuto los siguientes comandos para instalación de las dependencias – librerías del proyecto:
+
+npm init –y 
+crea el archivo package.json) datos de configuración del proyecto, lista las dependencias que se van instalando en el proyecto (librerías).
+
+npm i typescript –D
+crea la carpeta node_modules e instalo typescript como dependencia de desarrollo del proyecto (D)
+
+npx typescript --init
+creo archivo tsconfig.json
+
+npm install express
+instalo framework express para poder crear un servidor
+
+npm i @types/express
+instalo los tipos de express para que typescript los interprete correctamente en tiempo de compilación
+
+npm i pg
+para poder conectarnos a postgresql
+
+npm i @types/pg
+instalo los tipos de postgresql para que typescript los interprete correctamente en tiempo de compilación
+
+npm i mysql
+para poder conectarnos a mysql
+	
+npm i @types/mysql
+instalo los tipos de mysql para que typescript los interprete correctamente en tiempo de compilación
+
+npm i mysql2
+conexion con mysql
+
+npm i types/mysql (sin @)
+instalo los tipos de mysql para que typescript los interprete correctamente en tiempo de compilación
+
+npm i morgan -D
+nos permite ver las peticiones que gestiona el usuario en nuestro web
+
+npm i @types/morgan 
+instalo los tipos de morgan
+
+npm i nodemon –D (se instala como dependencia de desarrollo)
+instalo nodemon que me permite recompilar automáticamente la aplicación a medida que la voy modificando
+
+npm i concurrently -D
+este módulo permite ejecutar más de un proceso a la vez
+
+npm i ejs  (IMPORTANTE para la views)
+este módulo es un motor de planilla, permite transformar el código ejs a html, en el ejs puedo <%= %> insertar contenido del servidor en el cliente, transformando en dinámica la pagina web por medio de código js.
+
+npm i body-parser
+permite enviar datos del cliente al servidor.
+
+
+Otros Comandos para ejecuciones, etc en NodeJs:
+
+npx tsc 
+convertimos el código ts a js (compilación).
+
+npm run dev
+ejecuta la aplicación node js
+
+Una vez Ejecutado el código desde Visual Code:
+
+npx tsc 
+convertimos el código ts a js (compilación).
+
+IMPORTANTE => en package.json modificar =>
+
+ "scripts": {
+    "dev": "concurrently \"tsc --watch\" \"nodemon dist/index.js\"",
+    "build": "tsc"
+  },
+
+
+npm run dev
+ejecuta la aplicación node js.
+
+URL Del Navegador: localhost:3000
+Verificamos la conexión correcta con el servidor en el puerto 3000. En el navegador
+
+Ej direccionamiento a vista: http://localhost:3000/empleado/FormPrincipal
+
+Tener en cuenta /empleado/ => corresponde a la ruta que se especifica en el index.js
+
+
+

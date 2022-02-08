@@ -1,0 +1,1877 @@
+Estructura componente basico en REACT =>
+
+POSIBLES IMPORTACIONES EN COMPONENTES REACT =>
+
+import React, { useState, useEffect, Fragment } from 'react';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import Table from 'react-bootstrap/Table'
+import Navigation from "./Navigation";
+
+
+const GrillaArticulo  = (props) => {
+
+    const [dato, setDato] = useState(null)
+
+    useEffect(() => {
+
+        
+
+    },[])
+
+if(dato === null){
+
+        return null
+
+    }else{
+
+        return (  
+
+            <Fragment>
+
+                <Navigation></Navigation>
+
+                <Container>
+
+                <br></br>
+
+                <Alert variant="success" className="body">
+
+                <Alert.Heading className="alertTitle">GRILLA ALUMNOS</Alert.Heading>
+
+                <br></br>
+                <br></br>   
+
+                </Alert>
+
+                </Container>
+
+
+            </Fragment>
+
+        );
+
+    }    
+
+}
+ 
+export default GrillaArticulo;
+
+
+
+Return con desarrollo de tabla =>
+
+return (  
+
+            <Fragment>
+
+                <Navigation></Navigation>
+
+                <br></br>
+
+                <Alert variant="success">
+
+                <div className="body">   
+
+                <Alert.Heading className="alertTitle">GRILLA ALUMNOS</Alert.Heading>
+
+                <br></br>
+                <br></br>  
+
+                <Table className="tabla" striped bordered hover variant="dark">
+
+                    <thead>
+
+                            <tr>
+
+                                <th className="celda">Id</th>
+                                <th className="celda">Alumno</th>
+                                <th className="celda">Legajo</th>
+                                <th className="celda">Fecha Nacimiento</th>
+                                <th className="celda">Promedio Notas</th>
+                                <th className="celda">Acciones</th>
+
+                            </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {dato.map((alumno,i) => (
+
+                            <tr key={i}>
+
+                                <td className="celda">{}</td>
+                                <td className="celda">{}</td>
+                                <td className="celda">{}</td>
+                                <td className="celda">{}</td>
+                                <td className="celda">{}</td>
+
+
+                            </tr>
+
+                        ))}   
+
+                    </tbody>
+
+                </Table>    
+
+                </div> 
+
+                </Alert>
+
+            </Fragment>
+
+        );
+
+
+
+
+Componente con desarrollo de Filas(row) y columnas (col) =>
+
+ return (  
+
+
+                <Fragment>
+
+                <Navigation></Navigation>
+
+                <Container>
+
+                <br></br>
+
+                <Alert variant="success" className="body">
+
+                <Alert.Heading className="alertTitle">GRILLA ALUMNOS</Alert.Heading>
+
+                <br></br>
+                <br></br>   
+
+                <Row>
+
+                    <Col className="celdaImagen">
+                    
+                        <Image className='foto' src={ alumno.foto } rounded />
+
+                    </Col>
+
+                    <Col>
+
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <h2 className="nombreSI">{ alumno.alumno }</h2>
+                    
+                    
+                    </Col>
+
+
+                </Row>
+
+                <br></br>
+
+                <Row>
+
+
+                        <Col>
+                            
+                            <h5>CARRERA:</h5>
+                            <br></br>
+                            <h5>LEGAJO:</h5>
+                            <br></br>
+                            <h5>ESTA ACTIVO:</h5>
+                            <br></br>
+                            <h5>FECHA NACIMIENTO:</h5>
+                            <br></br>
+                            <h5>PROMEDIO:</h5>
+                            <br></br>
+                            <h5>NOTAS:</h5>
+                        
+                        </Col>
+
+                        <Col>
+                            
+                            <h5>{ alumno.carrera }</h5>
+                            <br></br>
+                            <h5>{ alumno.legajo }</h5>
+                            <br></br>
+                            <h5>SI</h5>
+                            <br></br>
+                            <h5>{ alumno.fechaNacimiento }:</h5>
+                            <br></br>
+                            <h5>{ promedio }</h5>
+                            <br></br>
+                            <h5>{ notas }</h5>
+                        
+                        </Col>
+
+                </Row>    
+
+                </Alert>
+
+                </Container>
+
+                </Fragment>
+
+
+            );
+
+
+COMPONENTE NAVIGATION =>
+
+import React, {Component, Fragment, useState} from 'react';
+import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import FormControl from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
+import Container from "react-bootstrap/Container";
+import Label from "react-bootstrap/FormLabel";
+import { useHistory } from "react-router-dom"
+
+const Navigation = () => {
+
+    const [dato,setDato] = useState({
+
+        region:null,
+        codigo:null
+
+    })
+
+    //HISTORY REDIRECCIONAR POR PAGINA =>
+    let history = useHistory()
+
+    //ESTE METODO SE PUEDE USAR PARA CAPTURAR LA INFORMACION INGRESADA EN EL FORM:
+    const handleInputChange = (event) => {
+
+        setDato({
+
+            ...dato,
+            [event.target.name] : event.target.value
+
+        })
+
+
+    }
+
+    const obtenerRegion = () => {
+
+        try{
+
+            console.log("OBTENER REGION => ", dato.region)
+
+            /*
+
+            //Redirecciono y paso los datos a traves de un search =>
+            history.push({
+                pathname: '/',
+                search: '',
+                search: `?region=${dato.region}`,
+            })
+
+            */
+
+
+        }catch(error){
+
+            console.log("Error => ", error)
+
+        }
+
+
+    }
+
+
+    const obtenerCodigo = () => {
+
+        try{
+
+            console.log("OBTENER CODIGO => ", dato.codigo)
+
+
+        }catch(error){
+
+            console.log("Error => ", error)
+
+        }
+
+
+    }
+
+
+
+    return (
+
+        <Fragment>
+
+        <Navbar bg="primary" variant="dark">
+
+            <Navbar.Brand href="/">HOME</Navbar.Brand>
+            <Nav className="me-auto">
+            <Nav.Link href=""></Nav.Link>
+            <Nav.Link href=""></Nav.Link>
+            </Nav>
+            <Form className="d-flex">
+                <Form.Label>CODIGO:</Form.Label>&nbsp;&nbsp;
+                <FormControl
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                    name="codigo"
+                    onChange={handleInputChange}
+                />&nbsp;&nbsp;
+                <Button variant="outline-success" onClick={obtenerCodigo}>SEARCH</Button>&nbsp;&nbsp;
+                </Form>
+
+                <Form className="d-flex">
+                <Form.Label>REGION:</Form.Label>&nbsp;&nbsp;
+                <select name="region" onChange={handleInputChange}>
+                    <option value="">- Seleccione una Region -</option>
+                    <option value="africa">Africa</option>
+                    <option value="americas">Americas</option>
+                    <option value="asia">Asia</option>
+                    <option value="europe">Europe</option>
+                    <option value="oceania">Oceania</option>
+                </select>&nbsp;&nbsp;
+                <Button variant="outline-success" onClick={obtenerRegion}>SEARCH</Button>&nbsp;&nbsp;
+                </Form>
+        </Navbar>
+
+        </Fragment>  
+
+    );  
+}
+
+export default Navigation;
+
+
+
+
+
+COMPONENTE APP.js (ROUTES) =>
+
+import { Fragment } from 'react';
+import './App.css';
+import { Switch, Route} from 'react-router-dom';
+import GrillaAlumno from './components/GrillaAlumno'
+import DetalleAlumno from './components/DetalleAlumno'
+import MejorAlumno from './components/MejorAlumno'
+import Navigation from './components/Navigation';
+
+const App = () => {
+
+  
+    return(
+
+     
+      <Fragment>
+
+          <Switch>
+
+            <Route exact path="/" component={GrillaAlumno} ></Route>
+            <Route exact path="/detalleAlumno/:id" component={DetalleAlumno} ></Route>
+            <Route exact path="/mejorAlumno" component={MejorAlumno} ></Route>
+
+          </Switch>
+
+      </Fragment>
+
+    );
+
+
+
+}
+
+export default App;
+
+
+
+COMPONENTE INDEX.js EJECUTABLE =>
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter } from 'react-router-dom';
+import reportWebVitals from './reportWebVitals';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+
+reportWebVitals();
+
+
+COMPONENTE TARJETA =>
+
+import React, { useState, useEffect, Fragment } from 'react';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import Table from 'react-bootstrap/Table'
+import Navigation from "./Navigation";
+import Card from 'react-bootstrap/Card'
+import '../assets/css/tarjeta.css'
+
+
+const Tarjeta  = (props) => {
+
+    const [dato, setDato] = useState(null)
+
+    useEffect(() => {
+
+        
+
+    },[])
+
+
+
+    return (  
+
+        <Fragment>
+
+            <Container>
+
+            <br></br>
+
+           
+            <Card style={{ width: '21rem' }}>
+            <Card.Img className="imagenCard" variant="top" src={require(`../${props.imagen}`)} />
+            <Card.Body>
+                <Card.Title>{ props.modelo }</Card.Title>
+                <Card.Text>{ props.kilometros } Km</Card.Text>
+                <Card.Text>{ props.anio }</Card.Text>
+                <Card.Text>$ { props.precio }</Card.Text>
+                <Button variant="primary" href={`/detalleAuto/${props.patente}`}>VER MAS</Button>
+            </Card.Body>
+            </Card>
+
+           
+
+            </Container>
+
+
+        </Fragment>
+
+    );
+
+      
+
+}
+ 
+export default Tarjeta;
+
+
+COMPONENTE HOME CON TARJETA =>
+
+import React, { useState, useEffect, Fragment } from 'react';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import Table from 'react-bootstrap/Table'
+import Navigation from "./Navigation";
+import Tarjeta from "./Tarjeta"
+import '../assets/css/zodiaco.css'
+
+
+const Zodiaco  = (props) => {
+
+    const [dato, setDato] = useState(null)
+
+    useEffect(() => {
+
+        getZodiacos()
+
+    },[])
+
+    const getZodiacos = async () => {
+
+        try{
+
+            const response = await fetch("http://179.43.113.170:8082/test/tb/zodiaco.json", {
+
+
+                method:"GET",
+                params:{
+
+                }
+
+            })
+
+            const resJson = await response.json()
+
+            console.log("DATOS API => ", resJson)
+
+            setDato(resJson)
+
+
+        }catch(error){
+
+            console.log(error)
+
+        }
+
+
+    }
+
+if(dato === null){
+
+        return null
+
+    }else{
+
+        //reutilizar el componente tarjeta y le paso los datos =>
+        const card = dato.map((zodiaco, i) => {
+            return (
+              <Tarjeta
+                key = { zodiaco.id }
+                id = { zodiaco.id }
+                signo = { zodiaco.signo }
+                imagen = { zodiaco.imagen }
+              ></Tarjeta>
+            );
+        });
+
+        return (  
+
+            <Fragment>
+
+                <Navigation></Navigation>
+
+                <Container>
+
+                <br></br>
+
+                <Alert variant="success" className="body">
+
+                <Alert.Heading className="alertTitle">DATOS ZODIACO</Alert.Heading>
+
+                <br></br>
+                <br></br>   
+
+                  
+                <Row xs={1} md={3} className="g-4">
+                    { card }
+                </Row>
+
+                </Alert>
+
+                </Container>
+
+
+            </Fragment>
+
+        );
+
+    }    
+
+}
+ 
+export default Zodiaco;
+
+
+IMPORTAR ARCHIVO JSON PARA OBTENER DATOS DESDE ASSETS/DATOS =>
+
+import Datos from '../assets/datos/lista_heroes.json'
+
+  const getHeroes = async () => {
+
+        try{
+
+
+            //Obtenemos los datos desde el archivo JSON =>
+
+            const response = await Datos
+
+            console.log("DATOS DOCUMENTO JSON => ", response)
+
+            setDato(response)
+
+
+        }catch(error){
+
+            console.log(error)
+
+        }
+
+
+  }
+
+
+IMPORTAR IMAGEN DESDE ASSETS/IMG =>
+
+<Card.Img variant="top" src={require(`../${props.imagen}`)} className="imagenCard"/>
+
+
+IMPORTANTE SI TENEMOS ARCHIVO JSON CON DATOS PARA CONSULTAR SI ESTA EN PUBLIC =>
+
+const response = await axios("http://localhost:8080/lista_heroes.json", {
+
+
+IMPORTANTE SI TENEMOS ARCHIVO JSON CON DATOS PARA CONSULTAR SI ESTA EN CARPETA DATOS =>
+
+const response = await axios("@/datos/lista_heroes.json", {
+
+
+OBTENER VALOR DE PARAMETRO URL  versión 5.2.0 de react-router-dom =>
+
+let paramURL = props.match.params.id
+
+
+DIRECCIONAR A OTRA PAGINA DESDE CODIGO =>
+
+import { useHistory } from "react-router-dom"
+
+let history = useHistory()
+
+history.push("/home")
+
+DIRECCIONAR A OTRA PAGINA DESDE HTML =>
+
+import { Redirect } from 'react-router'
+
+<Redirect to='/somewhere'/>
+
+
+PARAMETROS OPCIONALES EN LA RUTA Y MULTIPLES PARAMETROS EN LA REDIRECCION =>
+
+VER NAVIGATION Y GRILLA ALUMNOS DE PROYECTO ALUMNOS PRUEBA.
+
+<Route exact path="/" component={GrillaAlumno} ></Route>
+
+PASAR Y OBTENER PARAMETROS FORMA 1 DESDE STATE =>
+
+history.push('/', {nombre:dato.nombre, legajo:"null"});
+
+history.push({
+  pathname: '/',
+  search: '',
+  state: { nombre:dato.nombre, legajo:"null" }
+})
+
+<Redirect 
+  to={`/home/${dato.legajo}/${"null"}`}
+/>
+
+ PAGINA QUE RECIVE LOS DATOS DE STATE =>
+
+import { useLocation } from "react-router-dom";
+
+const location = useLocation();
+
+const nombreURL = location.state.nombre
+
+const legajoURL = location.state.legajo
+
+PASAR Y OBTENER PARAMETROS FORMA 2 DESDE SEARCH (RECOMENDADO) =>
+
+NO HACE FALTA MODIFICAR LA ROUTE EN APP.js COMO PARAMETROS OPCIONALES !!!
+
+ PAGINA ENVIO SE PASAN LOS PARAMENTROS OPCIONALES =>
+
+import { useLocation } from "react-router-dom";
+
+ //Obtengo los datos pasados por search URL =>
+  let {search} = useLocation();
+  let query = new URLSearchParams(search)
+
+ history.push({
+      pathname: '/',
+      search: `?nombre=${dato.nombre}&legajo=null`,
+ })
+
+ PAGINA RECIVE ESTA EN ESCUCHA DE PARAMS => VER PROYECTO ALUMNOS HOOKS 
+
+ const [nomUrl, setNomUrl] = useState(query.get("nombre"))
+
+ const [legUrl, setLegUrl] = useState(query.get("legajo"))
+
+
+ useEffect(() => {
+
+        //De esta forma esta a la escucha de las modificaciones en los search URL =>
+        setNomUrl(query.get("nombre"))
+        setLegUrl(query.get("legajo"))
+        
+        getAlumnos()
+
+ },[query.get("nombre"), query.get("legajo")])
+
+ 
+
+
+INGRESO DE DATOS EN HTML =>
+
+{ }
+
+
+RECARGAR COMPONENTE =>
+
+window.location.reload()
+
+
+PASAR PARAMETRO DENTRO DE UN HREF =>
+
+<Button variant="link" href={`detalleAlumno/${alumno.legajo}`}>DETALLE</Button>
+
+
+METODO DE BUSQUEDA FIND =>
+
+//Utilizamos la funcion find() para obtener el planeta x codigo buscado:
+
+this.planetaEncontrado = await resJson.find((planeta) => (planeta.codigo).toString() === (parametroId).toString());
+
+
+METODOS PARA ORDENAR DE FORMA ASCENDENTE Y DESCENDENTE =>
+
+ //gestionamos el metodo sort() para ordenar objetos en forma descendente (Mayor a Menor):
+
+        this.planetasOrden = lista.sort(function (a, b){
+            return (b.diametro - a.diametro)
+        })
+
+        /*
+
+        //gestionamos el metodo sort() para ordenar objetos en forma ascendente (Menor a Mayor):
+        const listaOrdenada = lista.sort(function (a, b){
+            return (a.diametro - b.diametro)
+        })
+
+      ordenar(){
+
+      console.log("ENTRO ORDENAR=>")
+    
+      //Si es impar 
+      if(this.contador % 2 !== 0){
+
+        console.log("ENTRO IMPAR ASCENDENTE=>")
+
+        this.listaFacturas = this.listaFacturas.sort(function (a, b){
+          return (a.importe - b.importe)
+        })
+
+        this.contador++;
+
+      }else{
+
+        console.log("ENTRO PAR DESCENDENTE=>")
+
+        this.listaFacturas = this.listaFacturas.sort(function (a, b){
+          return (b.importe - a.importe)
+        })
+
+        this.contador++;
+
+      }
+
+    }
+
+IMPORTANTE VER TRABAJO PLANETAS O FACTURAS !!!!!
+
+
+METODO PARA CALCULAR PROMEDIO DE UN ARRAY =>
+
+ getPromedioPrecios(array){
+
+            let promedio = 0;
+
+            if(array.length === 0){
+
+                return 0;
+
+            }else{
+
+                for(let i = 0; i < array.length; i++){
+
+                    promedio += array[i];
+
+                }
+
+                return promedio / array.length;
+
+
+            }
+
+  },
+
+
+METODO PARA CALCULAR UN MEJOR PROMEDIO DE UN ARRAY DE PROMEDIOS =>
+
+ getMenorPrecio(array){
+
+            let promedio = this.getPromedioPrecios(array[0].preciosRelevados)
+
+            let menor = 0;
+
+            let codigo = 0;
+
+            for(let i = 0; i < array.length; i++){
+
+                menor = this.getPromedioPrecios(array[i].preciosRelevados)
+
+                if(menor < promedio){
+
+                    promedio = this.getPromedioPrecios(array[i].preciosRelevados)
+
+                    codigo = array[i].codigo
+
+                }
+
+            }
+
+            return codigo;
+
+
+ }
+
+
+SELECT CON EVENTO ONSELECT =>
+
+<b-nav-form>
+           <label>REGIONES: </label>&nbsp;   
+           <select name='region' onSelect={buscar}> 
+               <option value=''> -- Seleccione una región --</option>
+               <option value='eu'> European Union</option>
+               <option value='efta'>European Free Trade Association</option>
+               <option value='caricom'>Caribbean Community</option>
+               <option value='au'>African Union</option>
+               <option value='usan'>Union of South American Nations</option>
+               <option value='eeu'>Eurasian Economic Union</option>
+               <option value='al'>Arab League</option>
+               <option value='asean'>Association of Southeast Asian Nations</option>
+               <option value='cais'>Central American Integration System</option>
+               <option value='cefta'>Central European Free Trade Agreement</option>
+               <option value='nafta'>North American Free Trade Agreement</option>
+               <option value='saarc'>South Asian Association for Regional Cooperation</option>
+           </select>   
+</b-nav-form>
+
+Metodo para ejecutar el evento @change =>
+
+ buscar(){
+
+      console.log("Ingresado Buscar => ", dato.region)
+
+ }
+
+
+SELECT CON EVENTO @CLICK =>
+
+<b-nav-form>
+           <label>REGIONES: </label>&nbsp;   
+           <select name='region' v-model="form.busqueda" @click="buscar"> 
+               <option value=''> -- Seleccione una región --</option>
+               <option value='eu'> European Union</option>
+               <option value='efta'>European Free Trade Association</option>
+               <option value='caricom'>Caribbean Community</option>
+               <option value='au'>African Union</option>
+               <option value='usan'>Union of South American Nations</option>
+               <option value='eeu'>Eurasian Economic Union</option>
+               <option value='al'>Arab League</option>
+               <option value='asean'>Association of Southeast Asian Nations</option>
+               <option value='cais'>Central American Integration System</option>
+               <option value='cefta'>Central European Free Trade Agreement</option>
+               <option value='nafta'>North American Free Trade Agreement</option>
+               <option value='saarc'>South Asian Association for Regional Cooperation</option>
+           </select>   
+</b-nav-form>
+
+Metodo para ejecutar el evento @change =>
+
+ buscar(){
+
+      console.log("Ingresado Buscar => ", this.form.busqueda)
+
+      //Direccionamos pasando parametro seleccionado x URL =>
+      this.$router.push('/paises/' + this.form.busqueda) 
+
+
+ }
+
+
+IMPORTANTE SE LOGRA DESDE NAVIGATION PASAR DATOS A COMPONENTE HOME =>
+
+COMPONENTE NAVIGATION =>
+
+SE PASA LA LISTA OBTENIDA DESDE LA API CON EL SELECT REGION AL COMPONENTE HOME.
+
+<template>
+  <div>
+    <b-navbar toggleable="lg" type="dark" variant="info">
+        
+      <b-navbar-brand href="/">HOME</b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item href=""></b-nav-item>
+        </b-navbar-nav>
+
+        <b-navbar-nav class="ml-auto">
+            
+          <b-nav-form>
+            <label>CODIGO:&nbsp;&nbsp;</label>
+            <b-form-input
+              size="sm"
+              class="mr-sm-2"
+              placeholder="Search"
+              v-model="form.codigo"
+            ></b-form-input>
+            <b-button size="sm" class="my-2 my-sm-0" type="button" @click="buscarCodigo">BUSCAR</b-button>
+          </b-nav-form>
+
+          <b-nav-form>
+            <label>REGIONES:&nbsp;&nbsp;</label>
+            <select name='region' v-model="form.region" @change="buscarRegion"> 
+               <option value=''> -- Seleccione una región --</option>
+               <option value='africa'>AFRICA</option>
+               <option value='europe'>EUROPE</option>
+               <option value='americas'>AMERICAS</option>
+               <option value='asia'>ASIA</option>
+               <option value='oceania'>OCEANIA</option>
+           </select>   
+          </b-nav-form>
+
+        </b-navbar-nav>
+
+      </b-collapse>
+    </b-navbar>
+
+    <span>
+        <home-item :param="lista"></home-item>
+    </span>  
+
+  </div>
+
+</template>
+
+<script>
+import Home from '@/views/Home.vue'
+
+    export default {
+        name: 'Home',
+        components: {
+
+            "home-item":Home,
+ 
+        },
+        mounted() {
+        
+        },
+        data() {
+
+            return {
+            
+                form:{
+
+                    codigo:"",
+                    region:"",
+
+                },
+
+                lista:[],
+
+                pais:{},
+                
+            }
+        
+        },
+        methods: {
+
+            async buscarRegion(){
+
+                //Se pasa al componente Home importado la lista completa como parametro funciona Ok =>  
+
+                console.log("REGION SELECCIONADA => ", this.form.region)
+
+                try{
+
+                    const response = await fetch('https://restcountries.com/v2/region/' + this.form.region, {
+
+                        method:"GET",
+                        params:{
+
+                        }
+                    })
+
+                    const resJson = await response.json()
+
+                    this.lista = resJson
+
+                    console.log("LISTA DATOS => ", this.lista)
+
+
+                }catch(error){
+
+                    console.log("Error => ", error)
+
+                }
+
+            },
+
+            buscarCodigo(){
+
+                console.log("CODIGO SELECCIONADO => ", this.form.codigo)
+
+            }
+
+
+        },
+
+    }  
+</script>
+
+<style lang="">
+</style>
+
+
+COMPONENTE HOME =>
+
+SE RECORREN LA LISTA PARAM CON TODOS LOS DATOS Y SE MUESTRA 
+
+<template>
+
+  <span v-if="param.length > 0">
+
+  <div>
+
+    <br>
+
+    <b-alert show variant="dark">
+
+         <b-table-simple bordered dark>
+
+        <b-thead>
+
+            <b-th class="celda">Nombre</b-th>
+            <b-th class="celda">Capital</b-th>  
+            <b-th class="celda">Region</b-th>  
+            <b-th class="celda">Poblacion</b-th>  
+            <b-th class="celda">Area</b-th>
+            <b-th class="celda">Acciones</b-th>    
+
+        </b-thead>  
+
+        <b-tbody v-for="(pais,index) in param" :key="index">
+
+        <b-tr>
+
+            <b-td class="celda">{{ pais.name }}</b-td>
+            <b-td class="celda">{{ pais.capital }}</b-td>  
+            <b-td class="celda">{{ pais.region }}</b-td>    
+            <b-td class="celda">{{ pais.population }}</b-td>  
+            <b-td class="celda">{{ pais.area }}</b-td>
+            <b-td class="celda"><b-button variant="link" :href="'/detallePais' + pais.name">VER DETALLE</b-button></b-td>    
+
+        </b-tr>  
+
+        </b-tbody> 
+    
+        </b-table-simple>
+
+
+    </b-alert>
+
+  </div>
+
+  </span>  
+
+  <span v-else>
+
+    <div class="body">
+
+    <br>
+
+    <b-alert show variant="dark">
+
+        <h4>"Seleccione una Region para obtener lista de Paises"</h4>
+
+    </b-alert>
+
+    </div>    
+
+  </span>    
+  
+</template>
+
+<script>
+
+
+export default {
+
+    name: 'Home',
+
+    props: ["param"],
+
+    components: {
+        
+    },
+    mounted() {
+    
+    },
+    data() {
+
+        return {
+        
+        
+        }
+    
+    },
+    methods: {
+    }  
+
+}
+</script>
+
+<style scoped>
+
+    .celda{
+        text-align: center;
+    }
+
+    .body{
+        text-align: center;
+    }
+
+
+</style>
+
+
+2 FORMAS DE RESOLVER METODO DE BATALLA HEROES =>
+
+METODO 1 => 
+
+ batalla(){
+
+        //Asignamos los valores a las variables
+        let nombre1 = this.form.heroe1;
+        let nombre2 = this.form.heroe2;
+        let lista = this.heroesData;
+        let valor1 = 0;
+        let valor2 = 0;
+
+        for(let item of lista){
+
+            if(nombre1 === item.nombre){
+
+                valor1 = item.escalaPoder;
+
+            }
+
+            if(nombre2 === item.nombre){
+
+                valor2 = item.escalaPoder;
+            }
+
+        }
+
+        if(valor1 > valor2){
+
+            alert("GANADOR " + nombre1);
+            document.getElementById("ganador").innerHTML = nombre1;
+
+        }else if(valor1 < valor2){
+
+            alert("GANADOR " + nombre2);
+            document.getElementById("ganador").innerHTML = nombre2;
+
+        }else{
+
+            alert("EMPATE");
+            document.getElementById("ganador").innerHTML = "Empate";
+        }
+
+
+
+    },
+  }
+
+
+METODO 2 =>
+
+
+  luchar(){
+
+            const heroe1 = this.heroes.find((heroe) => (heroe.nombre).toString() === (this.form.heroe1).toString())
+
+            const heroe2 = this.heroes.find((heroe) => (heroe.nombre).toString() === (this.form.heroe2).toString())
+
+            console.log("HEROE1 => ", heroe1)
+
+            console.log("HEROE2 => ", heroe2)
+
+            if(heroe1.escalaPoder > heroe2.escalaPoder){
+
+                console.log("INGRESO")
+
+                console.log("EL GANADOR ES " + (heroe1.nombre).toUpperCase()) 
+
+                const nombre = (heroe1.nombre).toUpperCase()
+
+                document.getElementById("ganador").innerText = "GANADOR " + nombre
+
+            }else if(heroe1.escalaPoder < heroe2.escalaPoder){
+
+                console.log("INGRESO")
+
+                console.log("EL GANADOR ES " + (heroe2.nombre).toUpperCase()) 
+
+                const nombre = (heroe1.nombre).toUpperCase()
+
+                document.getElementById("ganador").innerText = "GANADOR " + nombre
+
+            }else if(heroe1.escalaPoder === heroe2.escalaPoder){
+
+                console.log("INGRESO")
+
+                console.log("EMPATE") 
+
+                document.getElementById("ganador").innerText = "EMPATE"
+
+            }    
+
+
+        }
+  },
+
+
+SOLUCIONO ACTUALIZACION AL CAMBIAR PARAMETROS X URL =>
+
+VER PROYECTO VUE PRUEBA_PAISES_SEPTIEMBRE
+
+<script>
+import axios from "axios";
+
+export default {
+  name: 'Home',
+  components: {
+    
+  },
+  mounted() {
+
+    const paramUrl = this.$route.params.id
+      
+    this.updatePage(paramUrl)
+
+  },
+  data() {
+
+    return {
+
+        lista:null,
+       
+    }
+   
+  },
+  watch: {
+    $route() {
+        this.updatePage(this.$route.params.id)
+    }
+  },
+  methods: {
+
+      async updatePage(paramUrl){
+
+          try{
+
+                console.log("REGION SELECCIONADA => ", paramUrl)
+
+                const response = await axios('https://restcountries.com/v2/regionalbloc/' + paramUrl, {
+
+                    method:"GET",
+                    params:{
+
+                    }
+                })
+
+                const resJson = await response.data
+
+                this.lista = resJson
+
+                console.log("DATOS API NAVIGATION => ", this.lista)
+
+
+          }catch(error){
+
+
+              console.log("Error => ", error)
+
+          }
+
+      }
+
+   
+  }  
+
+}
+</script>
+
+
+MONITOREAR UN VALOR DETERMINADO CON WATCH =>
+
+watch: {
+
+	nombre:function(value){
+		console.log(value);
+	}
+    
+},
+
+
+METODO FILTER =>
+
+El método Filter crea un nuevo arreglo, el cual no busca modificar el valor de los elementos para el nuevo arreglo, 
+únicamente retorna aquellos elementos que cumplan con las condiciones del filtro, los cuales serán almacenados en otro arreglo.
+
+const array = [
+  { id: 1, username: "Mapper"},
+  { id: 2, username: "Finder"},
+  { id: 3, username: "Eaching"}
+];
+
+const filtered = array.filter(function(element){
+  return element.id > 2;
+});
+
+//Output: [{ id: "3", username: "Eaching"}]
+
+OTRA BUSQUEDA CON FILTER =>
+
+const encontrado = resJson.filter(function (element){
+
+     return (element.nombre).toString() === (busquedaUrl).toString()
+
+})
+
+OTRA BUSQUEDA CON FILTER =>
+
+//Aplico el elemento de Busqueda filter devuelve array a diferencia de find que devuelve un unico elemento =>
+
+ const encontrado = resJson.filter(function (element){
+
+      var matcher = new RegExp(desURL, 'i')
+      return matcher.test([element.descripcion].join())
+                
+  })
+
+  setDato(encontrado)
+
+OTRA BUSQUEDA CON FILTER EN NUMEROSOS CAMPOS EJ NOMBRE-BIOGRAFIA-ARRAY PODERES =>
+
+
+//Aplicamos la busqueda en nombre y bio =>
+const encontrado = response.filter(function (element){
+
+  var matcher = new RegExp(busquedaURL, 'i')
+  return matcher.test([element.nombre, element.bio, element.poderes].join())
+            
+})
+
+
+
+OTRA BUSQUEDA CON FILTER PASANDO UN ARRAY DENTRO DE UN ARRAY =>
+
+//Filter utilizado para buscar array dentro de array =>
+
+          const lista = resJson.filter(function (element){
+
+              return element.meses.includes(parseInt(mesUrl))
+   
+          })
+
+
+METODOS AXIOS Y FETCH CONSULTA API =>
+
+AXIOS =>
+
+import axios from "axios";
+
+async getPlanetas(){
+
+      try{
+
+        const response = await axios('',{
+
+          methods:"GET",
+          params:{
+
+          }
+
+        })
+
+        const resJson = await response.data
+
+        this.lista = resJson
+
+        console.log("Lista => ", this.lista)
+
+
+      }catch(error){
+
+        console.log("Error => ", error)
+
+      }
+
+}
+
+
+
+FETCH =>
+
+async getPlanetas(){
+
+      try{
+
+        const response = await fetch('',{
+
+          methods:"GET",
+          params:{
+
+          }
+
+        })
+
+        const resJson = await response.json()
+
+        this.lista = resJson
+
+        console.log("Lista => ", this.lista)
+
+
+      }catch(error){
+
+        console.log("Error => ", error)
+
+      }
+
+}
+
+
+REUTILIZAR COMPONENTE PASANDO PARAMETROS =>
+
+import GrillaAlumno from "./GrillaAlumno"
+
+const [grilla, setGrilla] = useState(null)
+
+
+//METODO QUE SE EJECUTA EN EL EVENTO ONCLICK Y OBTIENE EL NOMBRE =>
+  const obtenerNombreOnClick = () => {
+
+    console.log("DATO NOMBRE => ",  dato.nombre)
+
+    const grilla = () => {
+
+      return (
+          
+          <GrillaAlumno
+          nombre={dato.nombre}
+          legajo={"null"}
+          ></GrillaAlumno>
+      );
+    }
+
+    setGrilla(grilla)
+
+    
+    }
+
+
+ return (
+
+    <Fragment>
+
+      { grilla }
+    
+    </Fragment>
+
+  );
+
+
+ //Forma 1 de filtrar los signos x elemento =>
+
+        
+
+        const fuego = lista.map((zodiaco, i) => {
+        
+            if(zodiaco.elemento === "Fuego"){
+    
+                return (
+    
+                  <li>{ zodiaco.signo }</li>
+                      
+                )
+    
+            }
+        })     
+
+
+
+       
+
+        //Forma 2 de filtrar signos x elementos =>
+
+       const aire = dato.filter((zodiaco) => (zodiaco.elemento).toString() === "Aire")
+
+       const agua = dato.filter((zodiaco) => (zodiaco.elemento).toString() === "Agua")
+
+       const fuego = dato.filter((zodiaco) => (zodiaco.elemento).toString() === "Fuego")
+
+       const tierra = dato.filter((zodiaco) => (zodiaco.elemento).toString() === "Tierra")
+
+       //Recorro el array de los elementos detectando el signo  =>
+
+       const elementAgua = agua.map((elemento,i) => {
+
+            return(
+
+                <li key={i}>{ elemento.signo }</li>
+
+            );
+
+       })
+
+
+APLICAR EVENTO OnSELECT (SELECCIONAR OPCION) =>
+
+const obtenerMesOnSelect = async (event) => {
+
+      console.log("Evento  =>", event)
+      setDato({...dato, mes: event })
+      console.log("DATO MES => ", await dato.mes)
+
+}
+
+ <DropdownButton as={ButtonGroup} title="SELECCIONE HEROE" id="bg-nested-dropdown" name="selectHeroe1"  onSelect={obtenerHeroe1}>
+                                {
+
+                                    lista.map((heroe, i)=> (
+
+                                    <Dropdown.Item eventKey={heroe.nombre} key={i}>{ heroe.nombre }</Dropdown.Item>
+
+                                    ))
+                                }
+  </DropdownButton>
+
+APLICAR EVENTO OnCHANGE (SELECCIONAR OPCION) =>
+
+//ESTE METODO SE PUEDE USAR PARA CAPTURAR LA INFORMACION INGRESADA EN EL FORM:
+    
+const handleInputChange = (event) => {
+
+      setDato({
+
+          ...dato,
+          [event.target.name] : event.target.value
+
+      })
+
+      console.log("DATO MES => ", dato.mes)
+
+}
+
+<Form.Label>MESES:</Form.Label>&nbsp;&nbsp;
+                <select name="mes" onChange={handleInputChange}>
+
+                    <option eventKey="1">ENERO</option>
+                    <option value="2">FEBRERO</option>
+                    <option value="3">MARZO</option>
+                    <option value="4">ABRIL</option>
+                    <option value="5">MAYO</option>
+                    <option value="6">JUNIO</option>
+                    <option value="7">JULIO</option>
+                    <option value="8">AGOSTO</option>
+                    <option value="9">SEPTIEMBRE</option>
+                    <option value="10">OCTUBRE</option>
+                    <option value="11">NOVIEMBRE</option>
+                    <option value="12">DICIEMBRE</option>
+
+
+                </select>&nbsp;&nbsp;
+
+
+COMPONENTE NAVIGATION CON BUSQUEDA APLICADA =>
+
+import React, {Component, Fragment, useState} from 'react';
+import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import FormControl from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
+import Container from "react-bootstrap/Container";
+import Label from "react-bootstrap/FormLabel";
+import { useHistory } from "react-router-dom"
+
+const Navigation = () => {
+
+    const [dato,setDato] = useState({
+
+        descripcion:null,
+
+    })
+
+    //HISTORY REDIRECCIONAR POR PAGINA =>
+    let history = useHistory()
+
+    //ESTE METODO SE PUEDE USAR PARA CAPTURAR LA INFORMACION INGRESADA EN EL FORM:
+    const handleInputChange = (event) => {
+
+        setDato({
+
+            ...dato,
+            [event.target.name] : event.target.value
+
+        })
+
+
+    }
+
+    //METODO QUE SE EJECUTA EN EL EVENTO ONCLICK Y OBTIENE EL NOMBRE =>
+    const obtenerDescripcionOnClick = () => {
+
+        console.log("DATO DESCRIPCION => ",  dato.descripcion)
+
+        
+        //Redirecciono y paso los datos a traves de un search =>
+  
+        history.push({
+          pathname: '/',
+          search: '',
+          search: `?descripcion=${dato.descripcion}`,
+        })
+  
+        
+  
+      
+    }
+  
+
+
+
+    return (
+
+        <Fragment>
+
+        <Navbar bg="primary" variant="dark">
+
+            <Navbar.Brand href="/">HOME</Navbar.Brand>
+            <Nav className="me-auto">
+            <Nav.Link href=""></Nav.Link>
+            <Nav.Link href="/ordenado">ORDENADO</Nav.Link>
+            </Nav>
+            <Form className="d-flex">
+                <Form.Label>DESCRIPCION:</Form.Label>&nbsp;&nbsp;
+                <FormControl
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                    name="descripcion"
+                    onChange={handleInputChange}
+                />
+                <Button variant="outline-success" onClick={obtenerDescripcionOnClick}>SEARCH</Button>&nbsp;&nbsp;
+                </Form>
+
+        </Navbar>
+
+        </Fragment>  
+
+    );  
+}
+
+export default Navigation;
+
+COMPONENTE QUE IMPLEMENTA LA BUSQUEDA =>
+
+import React, { useState, useEffect, Fragment } from 'react';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import Table from 'react-bootstrap/Table'
+import Navigation from "./Navigation";
+import Tarjeta from "./Tarjeta"
+import '../assets/css/planeta.css'
+import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom"
+
+
+const Planeta = (props) => {
+
+    //Obtengo los datos pasados por search URL =>
+    let {search} = useLocation();
+    let query = new URLSearchParams(search)
+
+    const [dato,setDato] = useState(null)
+
+    //Creo Hooks para que esten a la escucha de los parametros x search =>
+    const [desUrl, setDesUrl] = useState(query.get("descripcion"))
+
+    useEffect(() => {
+
+        setDesUrl(query.get("descripcion"))
+
+        getPlanetas()
+
+    },[query.get("descripcion")])
+
+    const getPlanetas = async () => {
+
+        const desURL = query.get("descripcion")
+
+        if(desURL === null || desURL === undefined){
+
+            try{
+
+                const response = await fetch("http://179.43.113.170:8082/test/ta/sistema_solar.json", {
+
+                    method:"GET",
+                    params:{
+
+                    }
+
+
+                })
+
+                const resJson = await response.json()
+
+                console.log("DATOS API => ", resJson)
+
+                setDato(resJson)
+
+            }catch(error){
+
+                console.log("Error => ", error)
+
+            }  
+            
+        }else{
+
+
+            try{
+
+                const response = await fetch("http://179.43.113.170:8082/test/ta/sistema_solar.json", {
+
+                    method:"GET",
+                    params:{
+
+                    }
+
+
+                })
+
+                const resJson = await response.json()
+
+                console.log("DATOS API => ", resJson)
+
+                const encontrado = resJson.filter(function (element){
+
+                    var matcher = new RegExp(desURL, 'i')
+                    return matcher.test([element.descripcion].join())
+                
+                })
+
+                setDato(encontrado)
+
+            }catch(error){
+
+                console.log("Error => ", error)
+
+            }  
+            
+
+
+        }    
+
+    }
+
+    if(dato === null){
+
+        return null
+
+
+    }else{
+
+
+        //Reutilizar el componente tarjeta y pasar los datos por props =>
+
+        const tarjeta = dato.map((planeta) => {
+
+            return(
+
+                <Tarjeta
+
+                    key={planeta.codigo}
+                    imagen={planeta.urlImg}
+                    nombre={planeta.nombre}
+                    codigo={planeta.codigo}
+                
+                
+                />
+
+            )
+
+        })
+
+
+        return(
+
+            <Fragment>
+
+                <Navigation></Navigation>
+
+                <Container>
+
+                <br></br>
+
+                <Alert variant="success" className="body">
+
+                <Alert.Heading className="alertTitle">DATOS PLANETA</Alert.Heading>
+
+                <br></br>
+                <br></br>   
+
+                  
+                <Row xs={1} md={3} className="g-4">
+                    { tarjeta }
+                </Row>
+
+                </Alert>
+
+                </Container>
+
+
+            </Fragment>
+
+
+        )
+
+
+    }
+
+
+
+}
+
+
+export default Planeta;
